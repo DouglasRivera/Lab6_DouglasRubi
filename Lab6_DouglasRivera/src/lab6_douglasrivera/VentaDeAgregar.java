@@ -5,6 +5,8 @@
  */
 package lab6_douglasrivera;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +21,10 @@ public class VentaDeAgregar extends javax.swing.JFrame {
     public VentaDeAgregar() {
         initComponents();
     }
-
+private String Genero = "";
+private String Tipo = "";
+private int Puntuacion = -1;
+    public static ArrayList <TipoProgramas> Programas = new ArrayList();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,8 +43,9 @@ public class VentaDeAgregar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jtxtAño = new javax.swing.JTextField();
         jBAgregarPrograma = new javax.swing.JButton();
+        jBAgregarPrograma1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,12 +59,22 @@ public class VentaDeAgregar extends javax.swing.JFrame {
 
         jcbGeneroPrograma.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jcbGeneroPrograma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comedia", "Romance", "Terror", "SyFy", "Suspenso", "Accion" }));
+        jcbGeneroPrograma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbGeneroProgramaItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jLabel3.setText("Tipo:");
 
         jcbTipoPrograma.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jcbTipoPrograma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anime", "Serie", "Documental", "Pelicula" }));
+        jcbTipoPrograma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbTipoProgramaItemStateChanged(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jLabel4.setText("Puntuacion:");
@@ -76,7 +92,7 @@ public class VentaDeAgregar extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jLabel5.setText("Año de Lanzamiento:");
 
-        jTextField2.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
+        jtxtAño.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
 
         jBAgregarPrograma.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         jBAgregarPrograma.setText("Agregar Programa");
@@ -86,48 +102,64 @@ public class VentaDeAgregar extends javax.swing.JFrame {
             }
         });
 
+        jBAgregarPrograma1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        jBAgregarPrograma1.setText("Regresar");
+        jBAgregarPrograma1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarPrograma1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(jBAgregarPrograma1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(36, 36, 36)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtxtNombrePrograma)
-                            .addComponent(jcbGeneroPrograma, 0, 179, Short.MAX_VALUE)
-                            .addComponent(jcbTipoPrograma, 0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtxtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(36, 36, 36)
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtxtNombrePrograma)
+                                        .addComponent(jcbTipoPrograma, 0, 179, Short.MAX_VALUE))
+                                    .addComponent(jcbGeneroPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(353, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBAgregarPrograma)
-                .addGap(311, 311, 311))
+                .addGap(308, 308, 308))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addContainerGap()
+                .addComponent(jBAgregarPrograma1)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtxtNombrePrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jcbGeneroPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbGeneroPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -139,27 +171,79 @@ public class VentaDeAgregar extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                    .addComponent(jtxtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jBAgregarPrograma)
-                .addGap(58, 58, 58))
+                .addGap(56, 56, 56))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
-        // TODO add your handling code here:
+        if (evt.getSource() == jSpinner1) {
+            int seleccionado =(Integer)jSpinner1.getValue();
+            this.Puntuacion = seleccionado;
+        }
     }//GEN-LAST:event_jSpinner1StateChanged
 
     private void jBAgregarProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarProgramaActionPerformed
-         boolean valido = true;
+        this.Tipo =  (String) jcbTipoPrograma.getSelectedItem();
+        this.Genero =  (String) jcbGeneroPrograma.getSelectedItem();
+        this.Puntuacion =  (Integer) jSpinner1.getValue();
+        boolean valido = true;
         if (this.jtxtNombrePrograma.getText() == null || "".equals(this.jtxtNombrePrograma.getText())) {
             JOptionPane.showConfirmDialog(this, "Ingrese el nombre");
+            valido = false;       
+        }
+        if (this.jtxtAño.getText() == null || "".equals(this.jtxtAño.getText())) {
+            JOptionPane.showConfirmDialog(this, "Ingrese el año");
+            valido = false;       
+        }
+        if (this.Genero == null || "".equals(this.Genero)) {
+            JOptionPane.showConfirmDialog(this, "Ingrese el genero del programa");
             valido = false;
-        
+        }
+        if (this.Tipo == null || "".equals(this.Tipo)) {
+            JOptionPane.showConfirmDialog(this, "Ingrese el tipo de programa");
+            valido = false;       
+        }
+        if (this.Puntuacion == -1 || "".equals(this.Puntuacion)) {
+            JOptionPane.showConfirmDialog(this, "Ingrese la puntuacion");
+            valido = false;       
+        }
+        if (valido) {
+            // int Puntos, int YearLanzamiento, String Nombre, String Tipo, String Genero
+            TipoProgramas estu = new TipoProgramas(Puntuacion, Integer.parseInt(jtxtAño.getText()), jtxtNombrePrograma.getText(), this.Tipo, this.Genero);
+            Programas.add(estu);
+           /* DefaultListModel modelo
+                    = (DefaultListModel) jlistE.getModel();
+
+            modelo.addElement(estu);
+            this.jlistE.setModel(modelo);
+*/
         }
     }//GEN-LAST:event_jBAgregarProgramaActionPerformed
+
+    private void jcbGeneroProgramaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbGeneroProgramaItemStateChanged
+        if (evt.getSource() == jcbGeneroPrograma) {
+            String seleccionado = (String) jcbGeneroPrograma.getSelectedItem();
+            this.Genero = seleccionado;
+        }
+    }//GEN-LAST:event_jcbGeneroProgramaItemStateChanged
+
+    private void jcbTipoProgramaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbTipoProgramaItemStateChanged
+        if (evt.getSource() == jcbTipoPrograma) {
+            String seleccionado = (String) jcbTipoPrograma.getSelectedItem();
+            this.Tipo = seleccionado;
+        }
+    }//GEN-LAST:event_jcbTipoProgramaItemStateChanged
+
+    private void jBAgregarPrograma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarPrograma1ActionPerformed
+        this.setVisible(false);
+        Menu menu = new Menu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jBAgregarPrograma1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,15 +282,16 @@ public class VentaDeAgregar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarPrograma;
+    private javax.swing.JButton jBAgregarPrograma1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox<String> jcbGeneroPrograma;
     private javax.swing.JComboBox<String> jcbTipoPrograma;
+    private javax.swing.JTextField jtxtAño;
     private javax.swing.JTextField jtxtNombrePrograma;
     // End of variables declaration//GEN-END:variables
 }

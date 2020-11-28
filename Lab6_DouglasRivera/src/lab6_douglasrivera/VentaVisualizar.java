@@ -59,6 +59,11 @@ public class VentaVisualizar extends javax.swing.JFrame {
 
         jbModificar.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -127,6 +132,13 @@ public class VentaVisualizar extends javax.swing.JFrame {
         va.setVisible(true);
               this.dispose();  
     }//GEN-LAST:event_jbEliminar1ActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        VentaDeAgregar va = new VentaDeAgregar();
+        va.setVisible(true);
+        
+        va.actualizarPrograma(WIDTH);
+    }//GEN-LAST:event_jbModificarActionPerformed
 
     /**
      * @param args the command line arguments

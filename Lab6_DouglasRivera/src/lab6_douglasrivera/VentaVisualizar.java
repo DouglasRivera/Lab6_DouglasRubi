@@ -28,6 +28,8 @@ public class VentaVisualizar extends javax.swing.JFrame {
         }
            
             this.jListVisualizar.setModel(modelo);
+            this.jbModificar.setEnabled(false);
+            this.jbEliminar.setEnabled(false);
     }
 
     /**
@@ -67,6 +69,11 @@ public class VentaVisualizar extends javax.swing.JFrame {
 
         jbEliminar.setFont(new java.awt.Font("Tempus Sans ITC", 0, 36)); // NOI18N
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Oy.jpg"))); // NOI18N
 
@@ -124,6 +131,8 @@ public class VentaVisualizar extends javax.swing.JFrame {
 
            //  modelo.addElement(Programas);
             this.jListVisualizar.setModel(modelo);*/
+        this.jbModificar.setEnabled(true);
+         this.jbEliminar.setEnabled(true);
     }//GEN-LAST:event_jListVisualizarValueChanged
 
     private void jbEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminar1ActionPerformed
@@ -137,8 +146,14 @@ public class VentaVisualizar extends javax.swing.JFrame {
         VentaDeAgregar va = new VentaDeAgregar();
         va.setVisible(true);
         
-        va.actualizarPrograma(WIDTH);
+        va.actualizarPrograma(jListVisualizar.getSelectedIndex());
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        if (VentaDeAgregar.Programas.size()>0){
+                VentaDeAgregar.Programas.remove(jListVisualizar.getSelectedIndex());
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     /**
      * @param args the command line arguments

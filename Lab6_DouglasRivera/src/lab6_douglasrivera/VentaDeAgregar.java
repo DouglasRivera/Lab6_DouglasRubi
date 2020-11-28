@@ -224,7 +224,7 @@ private int Puntuacion = -1;
             JOptionPane.showConfirmDialog(this, "Ingrese la puntuacion");
             valido = false;       
         }
-        if (valido) {
+        if (valido && this.tipoPrograma==null) {
             // int Puntos, int YearLanzamiento, String Nombre, String Tipo, String Genero
             TipoProgramas estu = new TipoProgramas(Puntuacion, Integer.parseInt(jtxtAño.getText()), jtxtNombrePrograma.getText(), this.Tipo, this.Genero);
             Programas.add(estu);
@@ -234,6 +234,13 @@ private int Puntuacion = -1;
             modelo.addElement(estu);
             this.jlistE.setModel(modelo);
 */
+        } else {
+             tipoPrograma.setGenero(this.Genero);
+              tipoPrograma.setNombre(this.jtxtNombrePrograma.getText());
+               tipoPrograma.setPuntos(this.Puntuacion);
+                tipoPrograma.setYearLanzamiento(Integer.parseInt(jtxtAño.getText()));
+                tipoPrograma.setTipo(this.Tipo);
+                
         }
     }//GEN-LAST:event_jBAgregarProgramaActionPerformed
 
